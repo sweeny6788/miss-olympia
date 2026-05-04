@@ -4,9 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kontakt — Miss Olympia | Tiranë</title>
+  <meta name="description" content="Kontaktoni Miss Olympia në Tiranë. Vizitoni dyqanin tonë, na shkruani në WhatsApp ose porositni dërgesë në të gjithë Shqipërinë.">
+  <meta name="keywords" content="parfumeri Tiranë, parfume me mbushje, aroma, parfume për femra, parfume për meshkuj, dyqan parfumesh Shqipëri">
+  <meta name="author" content="Miss Olympia">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Miss Olympia">
+  <meta property="og:locale" content="sq_AL">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:url" content="https://miss-olympia.vercel.app/contact.html">
+  <meta property="og:title" content="Kontakt — Miss Olympia">
+  <meta property="og:description" content="Kontaktoni Miss Olympia në Tiranë. Vizitoni dyqanin, na shkruani në WhatsApp ose porositni dërgesë.">
+  <meta property="og:image" content="https://miss-olympia.vercel.app/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Miss Olympia Parfumeri Tiranë">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kontakt — Miss Olympia">
+  <meta name="twitter:description" content="Kontaktoni Miss Olympia në Tiranë. Vizitoni dyqanin, na shkruani në WhatsApp ose porositni dërgesë.">
+  <meta name="twitter:image" content="https://miss-olympia.vercel.app/images/og-image.jpg">
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <meta name="theme-color" content="#8B2252">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -106,12 +133,7 @@
   <section class="section">
     <div class="container">
       <div class="split-section fade-in">
-        <div style="background: var(--bg-secondary); height: 400px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.9rem;">
-          <div style="text-align:center;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke: var(--accent-gold); margin-bottom: 1rem;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <p data-al="Harta — Google Maps do të shtohet" data-en="Map — Google Maps will be added">Harta — Google Maps do të shtohet</p>
-          </div>
-        </div>
+        <div id="map" style="width: 100%; height: 450px; border-radius: 8px; overflow: hidden;"></div>
         <div class="content">
           <p class="label" data-al="Na vizitoni" data-en="Visit Us">Na vizitoni</p>
           <h2 data-al="Dyqani Ynë" data-en="Our Store">Dyqani Ynë</h2>
@@ -166,5 +188,27 @@
   </footer>
 
   <script src="js/main.js"></script>
+
+  <!-- TODO: client must replace placeholder lat/lng below with the real coordinates for both locations, and update the popup labels with real addresses. Coordinates are currently set to generic Tirana points. -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    const map = L.map('map').setView([41.3275, 19.8187], 14); // Tiranë center, zoom level 14
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap',
+      maxZoom: 19
+    }).addTo(map);
+
+    // Pin 1 — primary store (PLACEHOLDER COORDINATES - client must confirm)
+    const pin1 = L.marker([41.3275, 19.8187]).addTo(map)
+      .bindPopup('<strong>Miss Olympia — Dyqani Kryesor</strong><br>Tiranë, Shqipëri').openPopup();
+
+    // Pin 2 — second location (PLACEHOLDER COORDINATES - client must confirm)
+    const pin2 = L.marker([41.3325, 19.8250]).addTo(map)
+      .bindPopup('<strong>Miss Olympia — Lokacioni i Dytë</strong><br>Tiranë, Shqipëri');
+
+    // Fit map to show both pins with padding
+    const group = L.featureGroup([pin1, pin2]);
+    map.fitBounds(group.getBounds().pad(0.3));
+  </script>
 </body>
 </html>
