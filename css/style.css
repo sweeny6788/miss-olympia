@@ -159,13 +159,30 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
 @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
 .hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(250,248,245,0.2) 0%, rgba(240,235,227,0.7) 60%, rgba(250,248,245,0.95) 100%);
+  background: rgba(0, 0, 0, 0.45);
 }
 .hero-content { position: relative; z-index: 1; }
 .hero-content h1 { margin-bottom: 0.5rem; }
 .hero-content .tagline {
   font-family: var(--font-body); font-size: clamp(1rem, 1.5vw, 1.2rem);
   color: var(--text-muted); letter-spacing: 2px; margin-bottom: 2rem;
+}
+
+/* Dark-overlay hero: ensure all text is white + has subtle shadow for legibility.
+   Applies to homepage .hero, and to .page-hero pages that opt in with .dark-overlay. */
+.hero .hero-content h1,
+.hero .hero-content .tagline,
+.hero .hero-content .label,
+.page-hero.dark-overlay .hero-content h1,
+.page-hero.dark-overlay .hero-content .tagline,
+.page-hero.dark-overlay .hero-content .label {
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+.hero .hero-content .btn { color: #ffffff; }
+.hero .hero-content .btn:hover { color: #ffffff; }
+.page-hero.dark-overlay .hero-overlay {
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .btn {

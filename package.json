@@ -1,0 +1,12 @@
+{
+  "name": "miss-olympia-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Miss Olympia — refill perfumery in Tirana. Static site.",
+  "scripts": {
+    "generate:images": "node scripts/generate-og-image.js && node scripts/generate-favicon.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}
